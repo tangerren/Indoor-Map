@@ -1,0 +1,44 @@
+{
+  "name": "indoor-map",
+  "version": "1.0.0",
+  "description": "display indoor map by 3d",
+  "main": "index.js",
+  "scripts": {
+    "doc": "typedoc --mode modules --out docs src --hideGenerator",
+    "clean": "rimraf ./dist",
+    "build": "rimraf ./dist && tsc",
+    "build:watch": "rimraf ./dist tsc -w",
+    "bundle": "webpack",
+    "start": "webpack-dev-server --progress --hot --inline --no-colors"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WoShiSunWuKong/Indoor-Map.git"
+  },
+  "keywords": [
+    "indoor",
+    "indoor-map",
+    "3d"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/WoShiSunWuKong/Indoor-Map/issues"
+  },
+  "homepage": "https://github.com/WoShiSunWuKong/Indoor-Map#readme",
+  "dependencies": {
+    "dat.gui": "^0.7.0",
+    "stats.js": "^0.17.0",
+    "three": "^0.89.0"
+  },
+  "devDependencies": {
+    "@types/three": "^0.89.6",
+    "rimraf": "^2.6.2",
+    "ts-loader": "^3.4.0",
+    "typedoc": "^0.10.0",
+    "typedoc-webpack-plugin": "^1.1.4",
+    "typescript": "^2.7.1",
+    "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.11.1"
+  }
+}
