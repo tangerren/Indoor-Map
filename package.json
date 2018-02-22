@@ -4,7 +4,7 @@
   "description": "display indoor map by 3d",
   "main": "index.js",
   "scripts": {
-    "doc": "typedoc --mode modules --out docs src --hideGenerator",
+    "doc": "typedoc --mode modules --out docs src --hideGenerator --options ./configs/jsdoc.conf.json",
     "clean": "rimraf ./dist",
     "build": "rimraf ./dist && tsc",
     "build:watch": "rimraf ./dist tsc -w",

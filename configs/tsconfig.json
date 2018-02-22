@@ -1,0 +1,25 @@
+{
+	"compilerOptions": {
+		"target": "es5",
+		// "declaration": true,		
+		"outDir": "dist",
+		"module": "commonjs",
+		"noImplicitAny": true,
+		"allowJs": true,
+		"experimentalDecorators": true,
+		"strictNullChecks": true,
+		"stripInternal": true,
+		"sourceMap": true,
+		"lib": ["es2015", "es2015.iterable", "dom"],
+		"typeRoots": ["./node_modules/@types", "./src/custom-typings"]
+	},
+	"files": [
+		"src/index.ts"
+	],
+	"exclude": [
+		"node_modules",
+		"dist",
+		"karma.conf.js",
+		"webpack.config.js"
+	]
+}
