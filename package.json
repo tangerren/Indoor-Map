@@ -8,8 +8,8 @@
     "clean": "rimraf ./dist",
     "build": "rimraf ./dist && tsc",
     "build:watch": "rimraf ./dist tsc -w",
-    "bundle": "webpack",
-    "start": "webpack-dev-server --progress --hot --inline --no-colors"
+    "prod": "webpack --mode production --config ./configs/webpack.config.js",
+    "start": "webpack-dev-server --open --mode development --config ./configs/webpack.config.dev.js  --watch --progress --colors"
   },
   "repository": {
     "type": "git",
@@ -27,18 +27,22 @@
   },
   "homepage": "https://github.com/WoShiSunWuKong/Indoor-Map#readme",
   "dependencies": {
-    "dat.gui": "^0.7.0",
+    "dat.gui": "^0.7.1",
     "stats.js": "^0.17.0",
-    "three": "^0.89.0"
+    "three": "^0.91.0"
   },
   "devDependencies": {
-    "@types/three": "^0.89.6",
+    "@types/three": "^0.91.0",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.1.0",
     "rimraf": "^2.6.2",
-    "ts-loader": "^3.4.0",
-    "typedoc": "^0.10.0",
+    "ts-loader": "^4.1.0",
+    "typedoc": "^0.11.1",
     "typedoc-webpack-plugin": "^1.1.4",
-    "typescript": "^2.7.1",
-    "webpack": "^3.10.0",
-    "webpack-dev-server": "^2.11.1"
+    "typescript": "^2.7.2",
+    "webpack": "^4.2.0",
+    "webpack-cli": "^2.0.13",
+    "webpack-dev-server": "^3.1.1",
+    "webpack-merge": "^4.1.2"
   }
 }

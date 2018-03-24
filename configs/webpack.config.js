@@ -1,38 +1,31 @@
-var path = require('path');
-
-var HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
+const basePath = path.resolve(__dirname, '..');
+const HtmlWebPackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-    devtool: 'cheap-source-map',
-    entry: {
-        "index": "./src/index.ts" // 入口文件可以多个
-    },
+    entry: basePath + '/src/index.ts',
     output: {
-        filename: "[name].js", // 这里会自动生成index.js
-        path: __dirname + "/build" // 输出到哪个文件夹
-    },
-    resolve: {
-        extensions: [".ts", ".js", ".css"] // 自动补全，很重要
+        filename: "[name].js",
+        path: basePath + '/dist/'
     },
     module: {
-        loaders: [{
+        rules: [{
             test: /\.css$/,
-            loader: ['style-loader', 'css-loader']
-        }, {
-            test: /\.ts$/,
-            loader: "ts-loader"
+            use: ['style-loader', 'css-loader'],
+            exclude: /node_modules/
         }]
     },
-    plugins: [
-        new HtmlWebpackPlugin({
-            template: './src/index.html'
-        }),
-    ],
+    resolve: {
+        extensions: [".ts", ".js", ".css"]
+    },
     externals: [{
         IndoorMap: 'IndoorMap',
         IndoorMapLoader: 'IndoorMapLoader'
     }],
-    devServer: {
-        contentBase: path.join(__dirname, "build")
-    }
+    plugins: [
+        new HtmlWebPackPlugin({
+            template: basePath + '/src/index.html',
+            filename: "./index.html"
+        })
+    ]
 };
