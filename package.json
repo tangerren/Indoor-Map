@@ -9,7 +9,7 @@
     "build": "rimraf ./dist && tsc",
     "build:watch": "rimraf ./dist tsc -w",
     "prod": "webpack --mode production --config ./configs/webpack.config.js",
-    "start": "webpack-dev-server --open --mode development --config ./configs/webpack.config.dev.js  --watch --progress --colors"
+    "start": "webpack-dev-server --open --mode development --config ./configs/webpack.config.dev.js"
   },
   "repository": {
     "type": "git",

@@ -1,3 +1,4 @@
+var webpack = require('webpack');
 const path = require('path');
 const basePath = path.resolve(__dirname, '..');
 var webpackMerge = require("webpack-merge");
@@ -25,8 +26,12 @@ module.exports = webpackMerge(baseConfig, {
             }
         ]
     },
+    plugins: [
+        new webpack.HotModuleReplacementPlugin()
+    ],
     devServer: {
         contentBase: basePath + '/dist',
+        hot: true,
         compress: true,
         port: 4200,
         host: "127.0.0.1",
