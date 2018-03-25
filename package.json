@@ -4,11 +4,11 @@
   "description": "display indoor map by 3d",
   "main": "index.js",
   "scripts": {
-    "doc": "typedoc --mode modules --out docs src --hideGenerator --options ./configs/jsdoc.conf.json",
-    "clean": "rimraf ./dist",
+    "doc": "rimraf ./docs && typedoc --out docs src  --options ./configs/typedoc.js",
+    "clean": "rimraf ./dist ./doc",
     "build": "rimraf ./dist && tsc",
     "build:watch": "rimraf ./dist tsc -w",
-    "prod": "webpack --mode production --config ./configs/webpack.config.js",
+    "prod": "webpack --mode production --config ./configs/webpack.config.prod.js",
     "start": "webpack-dev-server --open --mode development --config ./configs/webpack.config.dev.js"
   },
   "repository": {
@@ -33,9 +33,11 @@
   },
   "devDependencies": {
     "@types/three": "^0.91.0",
+    "css-loader": "^0.28.11",
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.1.0",
     "rimraf": "^2.6.2",
+    "style-loader": "^0.20.3",
     "ts-loader": "^4.1.0",
     "typedoc": "^0.11.1",
     "typedoc-webpack-plugin": "^1.1.4",
