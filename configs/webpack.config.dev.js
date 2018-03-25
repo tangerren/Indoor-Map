@@ -1,4 +1,4 @@
-var webpack = require('webpack');
+const webpack = require('webpack');
 const path = require('path');
 const basePath = path.resolve(__dirname, '..');
 var webpackMerge = require("webpack-merge");

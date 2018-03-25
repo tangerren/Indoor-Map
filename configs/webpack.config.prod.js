@@ -1,21 +1,16 @@
 const path = require('path');
-const HtmlWebPackPlugin = require("html-webpack-plugin");
-const basePath = path.resolve(__dirname, '..');
+var webpackMerge = require("webpack-merge");
+const baseConfig = require('./webpack.config');
 
-module.exports = {
-    entry: basePath + '/src/index.ts',
-    output: {
-        filename: "[name].js",
-        path: basePath + '/dist/'
-    },
-    devtool: 'inline-source-map',
+module.exports = webpackMerge(baseConfig, {
+    devtool: 'cheap-source-map',
     module: {
         rules: [{
                 test: /\.ts$/,
                 loader: "ts-loader",
                 exclude: /node_modules/,
                 options: {
-                    configFile: path.resolve(__dirname, '../configs/tsconfig.json'),
+                    configFile: path.resolve(__dirname, '../configs/tsconfigProd.json'),
                 }
             },
             {
@@ -26,33 +21,10 @@ module.exports = {
                         minimize: true
                     }
                 }]
-            }, {
-                test: /\.css$/,
-                use: ['style-loader', 'css-loader'],
-                exclude: /node_modules/
             }
         ]
-    },
-    resolve: {
-        extensions: [".ts", ".js", ".css"]
-    },
-    externals: [{
-        IndoorMap: 'IndoorMap',
-        IndoorMapLoader: 'IndoorMapLoader'
-    }],
-    plugins: [
-        new HtmlWebPackPlugin({
-            template: basePath + '/src/index.html',
-            filename: "./index.html"
-        })
-    ],
-    devServer: {
-        contentBase: basePath + '/dist',
-        compress: true,
-        port: 4200,
-        host: "127.0.0.1",
     }
-};
+});
 // var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 // module.exports = {

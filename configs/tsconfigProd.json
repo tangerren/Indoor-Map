@@ -1,6 +1,5 @@
 {
 	"compilerOptions": {
-		"declaration": true,
 		"outDir": "../types/",
 		"module": "es6",
 		"target": "es5",
