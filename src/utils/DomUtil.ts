@@ -1,4 +1,4 @@
- import { Browser } from './Browser';
+import { Browser } from './Browser';
 
 export class DomUtil {
 
@@ -31,22 +31,23 @@ export class DomUtil {
 		canvasEle.style.width = '100%';
 		canvasEle.style.height = '100%';
 		pEle.appendChild(canvasEle);
-		return canvasEle;
-	}
 
-	// 根据 [width,height] 创建根元素
-	// TODO  后续优化为 创建任意指定属性、类型的元素
-	static createLogoEle(pEle: HTMLElement): HTMLElement {
-		let logoEle = document.createElement('a');
-		logoEle.innerText = "三维室内地图";
-		logoEle.style.color = "red";
- 		logoEle.style.width = '100px';
-		logoEle.style.height = '20px';
-		logoEle.style.bottom = '10px';
-		logoEle.style.right = '20px';
-		logoEle.style.position = 'absolute';
-		pEle.appendChild(logoEle);
-		return logoEle;
+		createLogoEle(pEle);
+
+		return canvasEle;
+
+		function createLogoEle(pEle: HTMLElement): HTMLElement {
+			let logoEle = document.createElement('a');
+			logoEle.innerText = "三维室内地图";
+			logoEle.style.color = "red";
+			logoEle.style.width = '100px';
+			logoEle.style.height = '20px';
+			logoEle.style.bottom = '10px';
+			logoEle.style.right = '20px';
+			logoEle.style.position = 'absolute';
+			pEle.appendChild(logoEle);
+			return logoEle;
+		}
 	}
 
 	// 获取 元素 与 浏览器左侧 的距离

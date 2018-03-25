@@ -16,4 +16,4 @@ export class Geometry {
 	 * 属性字段信息
 	 */
 	properties: Properties;
-}np
+}

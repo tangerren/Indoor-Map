@@ -1,38 +1,41 @@
 /**
- * indoor3D DOM相关
+ * IndoorMap HTML元素
  */
 
 import { Detector } from '../utils/Detector';
 import { DomUtil } from '../utils/DomUtil';
+import { IndoorScence } from './IndoorScence'
 import { IndoorMap3d } from './IndoorMap3d'
+import { ImParam } from './ImParam';
+import '../assets/css/indoor3D.css'
 
 export class IndoorMap {
 
 	/**
 	 * indoorMap的DOM根元素
 	 */
-	rootEle: HTMLElement;
+	private rootEle: HTMLElement;
 
 	/**
 	 * 绘制内容的Canvas元素
 	 */
-	canvasEle: HTMLCanvasElement;
+	private canvasEle: HTMLCanvasElement;
 
 	/**
 	 *  楼层选择器 DOM 元素
 	 */
-	floorEle: HTMLElement;
+	private floorEle: HTMLElement;
 
 	/**
 	 * 当前选中的楼层选择器 DOM 元素
 	 */
-	floorSelectedEle: HTMLElement;
+	private floorSelectedEle: HTMLElement;
 
 	/**
+	 * 初始化IndoorMap
 	 * @param options IndoorMap初始化参数
 	 */
-	constructor(options: any) {
-		// 根据传浏览器支持webgl的结果来确定是否绘制
+	constructor(options: ImParam) {
 		if (!Detector.webgl) {
 			console.error("浏览器不支持WebGL 3D");
 			return;
@@ -40,34 +43,19 @@ export class IndoorMap {
 		console.info("浏览器支持WebGL 3D");
 
 		// 解析参数，创建绘制容器div
-		if (options != undefined) {
-			// 如果指定了绘制容器DOM 的 id
-			if (options.hasOwnProperty('mapDiv')) {
-				this.rootEle = <HTMLElement>document.getElementById(options.mapDiv);
-			} else if (options.hasOwnProperty('size') && options.size.length == 2) {
-				// 如果没有指定绘制容器DOM，但是制定了绘制区域的范围大小
-				this.rootEle = DomUtil.createRootEle(options.size);
-			} else {
-				// 如果二者都没有指定，则在body追加div，全屏绘制显示
-				this.rootEle = DomUtil.createRootEle([window.innerWidth, window.innerHeight]);
-			}
+		if (options.mapDiv != '') {
+			// 指定了绘制容器DOM 的 id
+			this.rootEle = <HTMLElement>document.getElementById(options.mapDiv);
 		} else {
-			console.log('传入data参数！！！')
-			return;
+			this.rootEle = DomUtil.createRootEle([window.innerWidth, window.innerHeight]);
 		}
 
 		this.canvasEle = DomUtil.createCanvasEle(this.rootEle);
-		// TODO  初始化 logo，追加到rootEle右下角
-		DomUtil.createLogoEle(this.rootEle);
 
-		let indoor3d = new IndoorMap3d(this.rootEle, this.canvasEle);
-		indoor3d.load(options.data);
-		if (options.hasOwnProperty('selectable')) {
-			indoor3d.setSelectable(options.selectable);
-		}
-		if (options.hasOwnProperty('floorControl') && options.floorControl == true) {
-			this.createFloorEle(indoor3d);
-		}
+		let indoorScence = new IndoorScence(this.rootEle, this.canvasEle);
+		let indoor3d = new IndoorMap3d(indoorScence);
+		indoor3d.load(options.dataUrl, () => { this.createFloorEle(indoor3d) });
+		indoor3d.setSelectable(options.selectable);
 	}
 
 	// 设置选中的楼层选择器的样式
