@@ -62,7 +62,6 @@ export class IndoorScence {
 			this.renderer.render(this.scene, this.camera);
 		});
 
-
 		// 白色平行光源  左前上方
 		var light = new THREE.DirectionalLight(0xffffff);
 		light.position.set(-500, 500, -500);
@@ -75,7 +74,6 @@ export class IndoorScence {
 
 		this.animate();
 	}
-
 
 	// 定时更新场景
 	animate() {
