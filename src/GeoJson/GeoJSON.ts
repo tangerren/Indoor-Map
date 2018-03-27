@@ -1,6 +1,6 @@
-import { Geometry } from './geometry'
+import { Feature } from './Feature'
 
 export class GeoJSON {
 	type: string;
-	features: Array<Geometry>
+	features: Array<Feature>
 }

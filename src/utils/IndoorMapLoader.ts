@@ -9,7 +9,7 @@ export class IndoorMapLoader extends THREE.Loader {
 		THREE.Loader.call(this);
 	}
 
-	load(url: string, callback: Function, callbackProgress?: Function, texturePath?: string) {
+	load(url: string, callback: Function, callbackProgress?: Function) {
 		let self = this;
 		let length: Number = 0; // 加载进度
 		let xhr = new XMLHttpRequest();

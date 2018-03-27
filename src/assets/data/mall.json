@@ -16,8 +16,6 @@
 		},
 		"properties": {
 			"floor": 0,
-			"floors": 10,
-			"height": 5,
 			"id": "B1KomHBHyutePj8cpbyAdOvL0XGSqmaR"
 		}
 	}, {
@@ -36,8 +34,7 @@
 		},
 		"properties": {
 			"id": "FSVTGF8blIAwoEyu1kYJVPFazmcILlcD",
-			"floor": 1,
-			"height": 2
+			"floor": 1
 		}
 	}, {
 		"type": "Feature",
@@ -55,8 +52,7 @@
 		},
 		"properties": {
 			"id": "cdOEDQ1XEJL5kBeaHcoajGhKRPymBZNv",
-			"floor": 1,
-			"height": 2
+			"floor": 1
 		}
 	}, {
 		"type": "Feature",
@@ -74,8 +70,7 @@
 		},
 		"properties": {
 			"id": "bME3V4qp9szWJjOrmoifZeEAfkWCAgj9",
-			"floor": 1,
-			"height": 2
+			"floor": 1
 		}
 	}, {
 		"type": "Feature",
@@ -93,8 +88,7 @@
 		},
 		"properties": {
 			"id": "wXlZm5MzTImkCMhphTg3IiSr2JYBn78U",
-			"floor": 1,
-			"height": 2
+			"floor": 1
 		}
 	}, {
 		"type": "Feature",
@@ -112,8 +106,7 @@
 		},
 		"properties": {
 			"id": "jvgTSpncxUhrkI6HTMd9FdQpIUdIyTsH",
-			"floor": 2,
-			"height": 2
+			"floor": 2
 		}
 	}, {
 		"type": "Feature",
@@ -131,8 +124,7 @@
 		},
 		"properties": {
 			"id": "oVX0tnsJOaR9xXN1yJaPeOvBvL7ehUqH",
-			"floor": 2,
-			"height": 2
+			"floor": 2
 		}
 	}, {
 		"type": "Feature",
@@ -150,8 +142,7 @@
 		},
 		"properties": {
 			"id": "TqePvatcHasxNyWMBhHChv0ggnC2MtzA",
-			"floor": 2,
-			"height": 2
+			"floor": 2
 		}
 	}, {
 		"type": "Feature",
@@ -169,8 +160,7 @@
 		},
 		"properties": {
 			"id": "8x9XaqDHPF1QyKcpkYriNFfMTekJTAEa",
-			"floor": 2,
-			"height": 2
+			"floor": 2
 		}
 	}, {
 		"type": "Feature",
@@ -189,8 +179,7 @@
 		},
 		"properties": {
 			"id": "hdB0aRbsyDEQkwGEvpHoCr9ZfsPi7Ar4",
-			"floor": 2,
-			"height": 2
+			"floor": 2
 		}
 	}, {
 		"type": "Feature",
@@ -208,8 +197,7 @@
 		},
 		"properties": {
 			"id": "zeL2HG0qG281MnIwIFw5HlvL4DEEvLJo",
-			"floor": 3,
-			"height": 2
+			"floor": 3
 		}
 	}, {
 		"type": "Feature",
@@ -227,8 +215,7 @@
 		},
 		"properties": {
 			"id": "YBWJbVwwYAq6nw20DEHnT7KkcwVI43FI",
-			"floor": 3,
-			"height": 2
+			"floor": 3
 		}
 	}, {
 		"type": "Feature",
@@ -246,8 +233,7 @@
 		},
 		"properties": {
 			"id": "DU78emyUm3q7QmdU1m2pC40l07gLhtjF",
-			"floor": 3,
-			"height": 2
+			"floor": 3
 		}
 	}, {
 		"type": "Feature",
@@ -265,8 +251,7 @@
 		},
 		"properties": {
 			"id": "ej2D1zMxmPW5U04GSYRJgO4BClyw1iay",
-			"floor": 3,
-			"height": 2
+			"floor": 3
 		}
 	}, {
 		"type": "Feature",
@@ -284,8 +269,7 @@
 		},
 		"properties": {
 			"id": "D0RwXQqotXM5ECiqoaJv47BtOogFESNC",
-			"floor": 3,
-			"height": 2
+			"floor": 3
 		}
 	}, {
 		"type": "Feature",
@@ -303,8 +287,7 @@
 		},
 		"properties": {
 			"id": "EFTffBjfywjCgrsnFdthWfbGed1VvZ5T",
-			"floor": 3,
-			"height": 2
+			"floor": 3
 		}
 	}, {
 		"type": "Feature",
@@ -322,8 +305,7 @@
 		},
 		"properties": {
 			"id": "Ak8G7TZVYElPhTlp0YoQJBwTAVHcPzMH",
-			"floor": 3,
-			"height": 2
+			"floor": 3
 		}
 	}]
 }
