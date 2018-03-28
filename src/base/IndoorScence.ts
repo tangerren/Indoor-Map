@@ -5,6 +5,7 @@
 import * as THREE from 'three';
 // import { OrbitControls } from '../utils/OrbitControl';
 import { OrbitControls } from '../THREE/OrbitControls.js';
+import { Vector3 } from 'three';
 
 
 export class IndoorScence {

@@ -5,6 +5,7 @@
 import * as THREE from 'three';
 // import { OrbitControls } from '../utils/OrbitControl';
 import { OrbitControls } from '../THREE/OrbitControls.js';
+import { Vector3 } from 'three';
 
 
 export class IndoorScence {
@@ -49,6 +50,7 @@ export class IndoorScence {
 
 		// 相机
 		this.camera = new THREE.PerspectiveCamera(50, this.canvasWidth / this.canvasHeight, 0.1, 2000);
+		this.camera.position.set(11854664.028897347, 200, -3452043.152127042);
 
 		// 在屏幕中显示坐标
 		var axes = new THREE.AxesHelper(1200);
@@ -57,6 +59,7 @@ export class IndoorScence {
 		// controls 地图平移旋转缩放 操作工具
 		this.controls = new OrbitControls(this.camera, this.canvasEle);
 		this.controls.enableKeys = true;
+		this.controls.target = new Vector3(11854664.028897347, 20, -3452043.152127042);
 
 		this.controls.addEventListener('change', () => {
 			this.renderer.render(this.scene, this.camera);
