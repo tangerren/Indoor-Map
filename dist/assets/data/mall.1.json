@@ -6,18 +6,18 @@
 			"type": "Polygon",
 			"coordinates": [
 				[
-					[11854667.68421923, 3452173.2815860924],
-					[11854661.712576397, 3451960.6911011743],
-					[11854942.37978963, 3451957.1081154733],
-					[11854945.962775331, 3452167.309943258],
-					[11854667.68421923, 3452173.2815860924]
+					[11854667.58421923, 3452173.3815860924],
+					[11854661.612576397, 3451960.5911011743],
+					[11854942.47978963, 3451957.0081154733],
+					[11854946.062775331, 3452167.409943258],
+					[11854667.58421923, 3452173.3815860924]
 				]
 			]
 		},
 		"properties": {
 			"floor": 0,
 			"floors": 3,
-			"height": 17,
+			"height": 200,
 			"id": "hZ3GlIZP1huRjplr8rIYdkufZO4yX9OH"
 		}
 	}, {
@@ -37,7 +37,7 @@
 		"properties": {
 			"id": "cOnmIRfAiJtNsFskLG4bAmW21GFml6EJ",
 			"floor": 1,
-			"height": 2
+			"height": 20
 		}
 	}, {
 		"type": "Feature",
@@ -56,7 +56,7 @@
 		"properties": {
 			"id": "w1GVkHmVqvbGegOqZD207Opms0hA3tcS",
 			"floor": 1,
-			"height": 2
+			"height": 20
 		}
 	}, {
 		"type": "Feature",
@@ -75,7 +75,7 @@
 		"properties": {
 			"id": "o9OK4sKN7Lfg6qBrMgb7aArgJXNBvOQk",
 			"floor": 1,
-			"height": 2
+			"height": 20
 		}
 	}, {
 		"type": "Feature",
@@ -94,7 +94,7 @@
 		"properties": {
 			"id": "rIoFDmT8KpvNr4mByU0HfvhfgDNoV48O",
 			"floor": 1,
-			"height": 2
+			"height": 20
 		}
 	}, {
 		"type": "Feature",
@@ -113,7 +113,7 @@
 		"properties": {
 			"id": "36l7rcslfPL7Hw22Q0pSvgq0G26Y9ib2",
 			"floor": 1,
-			"height": 2
+			"height": 20
 		}
 	}, {
 		"type": "Feature",
@@ -135,7 +135,7 @@
 		"properties": {
 			"id": "kjcTkicdp3DLl1vSDFDJuJqTgGtxx3FT",
 			"floor": 1,
-			"height": 2
+			"height": 20
 		}
 	}, {
 		"type": "Feature",
@@ -156,7 +156,7 @@
 		"properties": {
 			"id": "vvBBBXZc9VrtN3y9RJ2YhAYWNzT8khVl",
 			"floor": 1,
-			"height": 2
+			"height": 20
 		}
 	}, {
 		"type": "Feature",
@@ -178,7 +178,7 @@
 		"properties": {
 			"id": "2KK8EmsTvHsB5fYQS8dk0ZdUn4UDAUld",
 			"floor": 1,
-			"height": 2
+			"height": 20
 		}
 	}, {
 		"type": "Feature",
@@ -206,7 +206,7 @@
 		"properties": {
 			"id": "fYfX3mn65OWhw63ta1VS4AVQzwx56Puj",
 			"floor": 2,
-			"height": 2
+			"height": 20
 		}
 	}, {
 		"type": "Feature",
@@ -233,7 +233,7 @@
 		"properties": {
 			"id": "pzJcgjyaAPMBfyZZmmTbJ2AfQJPeWqmf",
 			"floor": 3,
-			"height": 2
+			"height": 20
 		}
 	}, {
 		"type": "Feature",
@@ -260,7 +260,7 @@
 		"properties": {
 			"id": "y0xV56bPUETAfwWMN6DoYoGQIj0CNd8X",
 			"floor": 3,
-			"height": 2
+			"height": 20
 		}
 	}, {
 		"type": "Feature",
@@ -287,7 +287,7 @@
 		"properties": {
 			"id": "DVYQvdBMw9dm9PGiQp5dihxfF2z3PXXd",
 			"floor": 3,
-			"height": 2
+			"height": 20
 		}
 	}, {
 		"type": "Feature",
@@ -306,7 +306,7 @@
 		"properties": {
 			"id": "pAWbnybWeRdCQvErOvi9kTsWhr1qV8Lf",
 			"floor": 3,
-			"height": 2
+			"height": 20
 		}
 	}, {
 		"type": "Feature",
@@ -353,7 +353,7 @@
 		"properties": {
 			"id": "7UxQCnDCQBSPQMpI4j6inx9MIXW0PsYq",
 			"floor": 3,
-			"height": 2
+			"height": 20
 		}
 	}, {
 		"type": "Feature",
@@ -372,7 +372,7 @@
 		"properties": {
 			"id": "szf3tYGbt57F7tFA3Ymus3N6zfT5vryz",
 			"floor": 3,
-			"height": 2
+			"height": 20
 		}
 	}]
 }

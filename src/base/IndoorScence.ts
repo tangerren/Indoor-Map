@@ -47,7 +47,6 @@ export class IndoorScence {
 		});
 		this.renderer.autoClear = true;
 		this.renderer.setSize(this.rootEle.clientWidth, this.rootEle.clientHeight);
-		this.renderer.setClearColor("#F2F2F2");
 
 		// 相机
 		this.camera = new THREE.PerspectiveCamera(50, this.canvasWidth / this.canvasHeight, 0.1, 2000);

@@ -14,6 +14,9 @@ export class DrawGeoJson {
 	static theme: Default3dTheme;
 
 	static draw(data: Array<any>, indoorScence: IndoorScence) {
+		if (this.theme == undefined) {
+			this.theme = new Default3dTheme();
+		}
 		this.indoorScence = indoorScence;
 		// this.indoorScence.scene.add(this.mall);
 		// [{
@@ -22,46 +25,54 @@ export class DrawGeoJson {
 		// 	height:
 		// }]
 		data.forEach(item => {
+			// mall+room
 			let shape = new THREE.Shape(item.arrVector2);
-			let geometry = new THREE.ShapeGeometry(shape);
-			let floorMesh = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({
-				color: "#D3D3D3",
-				opacity: 0.7,
-				transparent: true
-			}));
-
-			let extrudeSettings = {
-				amount: item.height,
+			// 地板
+			let floorShape = new THREE.Shape(data[0].arrVector2);
+			let extrudBoxeSettings = {
+				amount: item.height, //楼高或房高
 				bevelEnabled: false
 			};
-			let roomGeometry = new THREE.ExtrudeGeometry(shape, extrudeSettings);
-			let roomMaterial = new THREE.MeshLambertMaterial({
-				color: "#1f77b4",
-				opacity: 0.7,
-				transparent: true
-			});
-			let roomMesh = new THREE.Mesh(roomGeometry, roomMaterial);
-			roomMesh.type = 'solidroom';
+			let extrudeFloorSettings = {
+				amount: 2,//地板高度,
+				bevelEnabled: false
+			};
+			let boxGeometry = new THREE.ExtrudeGeometry(shape, extrudBoxeSettings);
+			let floorGeometry = new THREE.ExtrudeGeometry(floorShape, extrudeFloorSettings);
 
-			let roomGeometryL = new THREE.Geometry().setFromPoints(item.arrVector2);
-			let roomWire = new THREE.Line(roomGeometryL, new THREE.LineBasicMaterial({
+			let boxMaterial;
+			let floorMaterial = new THREE.MeshLambertMaterial(this.theme.floor);
+			if (item.floor == 0) {
+				boxMaterial = new THREE.MeshLambertMaterial(this.theme.building);
+			} else {
+				boxMaterial = new THREE.MeshLambertMaterial(this.theme.room('100', 102));
+			}
+
+			let boxMesh = new THREE.Mesh(boxGeometry, boxMaterial);
+			let floorMesh = new THREE.Mesh(floorGeometry, boxMaterial);
+			if (item.floor != 0) {
+				boxMesh.type = 'solidroom';
+			}
+
+			boxMesh.position.set(0, 25 * item.floor, 0);
+			floorMesh.position.set(0, 25 * item.floor, 0);
+
+			let boxGeometryL = new THREE.Geometry().setFromPoints(item.arrVector2);
+			let boxWire = new THREE.Line(boxGeometryL, new THREE.LineBasicMaterial({
 				color: "#5C4433",
 				opacity: 0.5,
 				transparent: true,
 				linewidth: 1
 			}));
-			roomWire.position.set(0, 0, 0);
-			// if (item.floor == 0) {
-			// } else {
-			floorMesh.position.set(0, 0, 5 * item.floor); // 地板高度
-			// }
-			roomWire.rotateOnAxis(new THREE.Vector3(1, 0, 0), -Math.PI / 2);
-			floorMesh.rotateOnAxis(new THREE.Vector3(1, 0, 0), -Math.PI / 2);
-			roomMesh.rotateOnAxis(new THREE.Vector3(1, 0, 0), -Math.PI / 2);
+			boxWire.position.set(0, 25 * item.floor, 0);
 
+			boxMesh.rotateOnAxis(new THREE.Vector3(1, 0, 0), -Math.PI / 2);
+			floorMesh.rotateOnAxis(new THREE.Vector3(1, 0, 0), -Math.PI / 2);
+			boxWire.rotateOnAxis(new THREE.Vector3(1, 0, 0), -Math.PI / 2);
+
+			this.indoorScence.scene.add(boxWire);
+			this.indoorScence.scene.add(boxMesh);
 			this.indoorScence.scene.add(floorMesh);
-			this.indoorScence.scene.add(roomWire);
-			this.indoorScence.scene.add(roomMesh);
 		})
 
 		//reset the camera to default configuration   重置相机位置、视角、角度
