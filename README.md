@@ -9,7 +9,7 @@ clone the repository , run npm commond
 ```
 npm i
 ```
-after install the npm , run the ng server
+after install the npm , run 
 ```
 npm start
 ```
