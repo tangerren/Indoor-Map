@@ -3,6 +3,10 @@
 		"quotemark": [
 			true,
 			"single"
-		]
+		],
+		"curly": [
+		      true,
+		      "ignore-same-line"
+		 ],
 	}
 }
