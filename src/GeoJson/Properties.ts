@@ -5,6 +5,10 @@ import { TYPE } from './type'
  */
 export class Properties {
 	/**
+	 * 建筑物或者房间的中心点
+	 */
+	center: number[];
+	/**
 	 * 高度，房间高、楼层高或者建筑物高
 	 */
 	height: number;
