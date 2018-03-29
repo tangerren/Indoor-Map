@@ -6,9 +6,12 @@ import * as THREE from 'three';
 // import { OrbitControls } from '../utils/OrbitControl';
 import { OrbitControls } from '../THREE/OrbitControls.js';
 import { Vector3 } from 'three';
+import { ParseGeoJson } from '../GeoJson/ParseGeoJson';
+import { DrawGeoJson } from '../GeoJson/DrawGeoJson';
 
 
 export class IndoorScence {
+
 	rootEle: HTMLElement;
 	canvasEle: HTMLCanvasElement;
 	// theme: any;
@@ -47,6 +50,7 @@ export class IndoorScence {
 		});
 		this.renderer.autoClear = true;
 		this.renderer.setSize(this.rootEle.clientWidth, this.rootEle.clientHeight);
+		this.renderer.setClearColor("#F2F2F2");
 
 		// 相机
 		this.camera = new THREE.PerspectiveCamera(50, this.canvasWidth / this.canvasHeight, 0.1, 2000);
@@ -89,5 +93,18 @@ export class IndoorScence {
 			}
 		}
 		this.viewChanged = false;
+	}
+
+	loadData(url: string) {
+		var loader = new THREE.FileLoader();
+		loader.load(url, (geoJSON) => {
+			let parse = new ParseGeoJson();
+			let jsonData = parse.parse(JSON.parse(geoJSON));
+			DrawGeoJson.draw(jsonData , this);
+		}, (xhr) => {
+			console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+		}, (err) => {
+			console.log(err);
+		})
 	}
 }

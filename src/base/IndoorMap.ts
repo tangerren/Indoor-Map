@@ -5,7 +5,7 @@
 import { Detector } from '../utils/Detector';
 import { DomUtil } from '../utils/DomUtil';
 import { IndoorScence } from './IndoorScence'
-import { IndoorMap3d } from './IndoorMap3d'
+import { Mall } from './Mall'
 import { ImParam } from './ImParam';
 import '../assets/css/indoor3D.css'
 
@@ -31,6 +31,8 @@ export class IndoorMap {
 	 */
 	private floorSelectedEle: HTMLElement;
 
+
+	private mall: Mall;
 	/**
 	 * 初始化IndoorMap
 	 * @param options IndoorMap初始化参数
@@ -46,6 +48,7 @@ export class IndoorMap {
 		if (options.mapDiv != '') {
 			// 指定了绘制容器DOM 的 id
 			this.rootEle = <HTMLElement>document.getElementById(options.mapDiv);
+			this.rootEle.style.background = "#F2F2F2";
 		} else {
 			this.rootEle = DomUtil.createRootEle([window.innerWidth, window.innerHeight]);
 		}
@@ -53,75 +56,7 @@ export class IndoorMap {
 		this.canvasEle = DomUtil.createCanvasEle(this.rootEle);
 
 		let indoorScence = new IndoorScence(this.rootEle, this.canvasEle);
-		let indoor3d = new IndoorMap3d(indoorScence);
-		indoor3d.load(options.dataUrl, () => { this.createFloorEle(indoor3d) });
-		indoor3d.setSelectable(options.selectable);
+		indoorScence.loadData(options.dataUrl);
 	}
 
-	// 设置选中的楼层选择器的样式
-	updateFloorEle(indoorMap: IndoorMap3d) {
-		if (this.rootEle == null) {
-			return;
-		}
-		var ulChildren = this.rootEle.children;
-		if (ulChildren.length == 0) {
-			return;
-		}
-		if (this.floorSelectedEle != null) {
-			this.floorSelectedEle.className = '';
-		}
-		let curid = indoorMap.mall.getCurFloorId();
-		if (curid == 0) {
-			this.floorSelectedEle = <HTMLElement>this.rootEle.children[0];
-		} else {
-			for (let i = 0; i < ulChildren.length; i++) {
-				if ((<HTMLElement>ulChildren[i]).innerText == indoorMap.mall.getCurFloorId().toString()) {
-					this.floorSelectedEle = <HTMLElement>ulChildren[i];
-				}
-			}
-		}
-		if (this.floorSelectedEle != null) {
-			this.floorSelectedEle.className = 'selected';
-		}
-	}
-
-	getMapDiv() {
-		return this.rootEle;
-	}
-
-	getFloorEle(): HTMLElement {
-		return this.floorEle;
-	}
-
-	// 创建楼层选择器DOM元素
-	createFloorEle(indoorMap: IndoorMap3d) {
-		if (indoorMap == undefined || indoorMap.mall == null) {
-			console.error('the data has not been loaded yet. please call this function in callback');
-			return null;
-		}
-		//create the ul list
-		this.floorEle = document.createElement('ul');
-		this.floorEle.className = 'floorsUI';
-
-		var li = document.createElement('li');
-		li.innerText = "All";
-		this.floorEle.appendChild(li);
-		li.onclick = () => (
-			indoorMap.showAllFloors()
-		)
-
-		var floors = indoorMap.mall.jsonData.data.Floors;
-		let self = this;
-		for (var i = 0; i < floors.length; i++) {
-			(function (arg) {
-				li = document.createElement('li');
-				li.innerText = floors[arg].Name;
-				self.floorEle.appendChild(li);
-				li.onclick = function () {
-					indoorMap.showFloor(floors[arg]._id)
-				}
-			})(i);
-		}
-		this.rootEle.appendChild(this.floorEle);
-	}
 }

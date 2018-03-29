@@ -1,4 +1,4 @@
-import { IndoorMap } from "./base/IndoorMapNew";
+import { IndoorMap } from "./base/IndoorMap";
 // import { IndoorMap } from "./base/IndoorMap";
 
 var indoorMap = new IndoorMap({

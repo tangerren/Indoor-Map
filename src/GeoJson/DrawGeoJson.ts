@@ -7,23 +7,26 @@ import { Theme } from '../base/Theme';
 import { Default3dTheme } from '../theme/Default3dTheme';
 import { Default2dTheme } from '../theme/Default2dTheme';
 import { Vector3 } from 'three';
+import { Rect } from '../base/Rect';
 
 export class DrawGeoJson {
 
 	static indoorScence: IndoorScence;
 	static theme: Default3dTheme;
 
-	static draw(data: Array<any>, indoorScence: IndoorScence) {
+	static draw(data: Rect[], indoorScence: IndoorScence) {
 		if (this.theme == undefined) {
 			this.theme = new Default3dTheme();
 		}
 		this.indoorScence = indoorScence;
-		// this.indoorScence.scene.add(this.mall);
-		// [{
-		// 	Array<vextor2>,
-		// 	floor:
-		// 	height:
-		// }]
+
+		let center = data[0].center;
+		let baseHeight = 0.2;
+		let mallHeight = data[0].height;
+		let floorHeight = data[1].height;
+		let floorCellHeight = 5;
+		let cameraDistance = 150;
+
 		data.forEach(item => {
 			// mall+room
 			let shape = new THREE.Shape(item.arrVector2);
@@ -34,7 +37,7 @@ export class DrawGeoJson {
 				bevelEnabled: false
 			};
 			let extrudeFloorSettings = {
-				amount: 2,//地板高度,
+				amount: baseHeight,//地板高度,
 				bevelEnabled: false
 			};
 			let boxGeometry = new THREE.ExtrudeGeometry(shape, extrudBoxeSettings);
@@ -54,8 +57,8 @@ export class DrawGeoJson {
 				boxMesh.type = 'solidroom';
 			}
 
-			boxMesh.position.set(0, 25 * item.floor, 0);
-			floorMesh.position.set(0, 25 * item.floor, 0);
+			boxMesh.position.set(0, (floorHeight + floorCellHeight) * item.floor, 0);
+			floorMesh.position.set(0, (floorHeight + floorCellHeight) * item.floor, 0);
 
 			let boxGeometryL = new THREE.Geometry().setFromPoints(item.arrVector2);
 			let boxWire = new THREE.Line(boxGeometryL, new THREE.LineBasicMaterial({
@@ -64,7 +67,7 @@ export class DrawGeoJson {
 				transparent: true,
 				linewidth: 1
 			}));
-			boxWire.position.set(0, 25 * item.floor, 0);
+			boxWire.position.set(0, (floorHeight + floorCellHeight) * item.floor, 0);
 
 			boxMesh.rotateOnAxis(new THREE.Vector3(1, 0, 0), -Math.PI / 2);
 			floorMesh.rotateOnAxis(new THREE.Vector3(1, 0, 0), -Math.PI / 2);
@@ -76,9 +79,8 @@ export class DrawGeoJson {
 		})
 
 		//reset the camera to default configuration   重置相机位置、视角、角度
-		var camAngle = -0.890338608975752 + Math.PI / 2;
-		var camDir = [Math.cos(camAngle), Math.sin(camAngle)];
-		var camLen = 500;
-		var tiltAngle = 75.0 * Math.PI / 180.0;
+		this.indoorScence.camera.position.set(center[0] - cameraDistance, 200, -center[1] + cameraDistance);
+		this.indoorScence.controls.target = new Vector3(center[0], 20, -center[1]);
+
 	}
 }
