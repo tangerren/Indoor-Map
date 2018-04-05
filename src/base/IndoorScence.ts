@@ -126,9 +126,7 @@ export class IndoorScence {
 	}
 
 	drawFloor(floor: number) {
-		while (this.scene.children.length) {
-			this.scene.remove(this.scene.children[0]);
-		}
+		this.clearObj();
 		if (floor === 0) {
 			DrawGeoJson.draw(this.boxs, this);
 			return;
@@ -139,6 +137,19 @@ export class IndoorScence {
 				floorBoxs.push(ele);
 			}
 		});
-		DrawGeoJson.draw(floorBoxs, this);
+		DrawGeoJson.draw(floorBoxs, this, floor === 0 ? false : true);
+	}
+
+	clearObj() {
+		let lights = [];
+		while (this.scene.children.length) {
+			if (this.scene.children[0].type === 'DirectionalLight') {
+				lights.push(this.scene.children[0]);
+			}
+			this.scene.remove(this.scene.children[0]);
+		}
+		lights.forEach(element => {
+			this.scene.add(element);
+		});
 	}
 }

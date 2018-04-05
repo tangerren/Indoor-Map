@@ -4,6 +4,7 @@ import { GeoJSON } from './GeoJSON';
 import { Box } from '../base/Box';
 
 import * as THREE from 'three';
+import { Mall } from '../base/Mall';
 
 export class ParseGeoJson {
 
@@ -15,16 +16,17 @@ export class ParseGeoJson {
 			console.error('geojson type字段不符合要求！');
 			return [];
 		}
-
 		let mallData: Box[] = [];
 		json.features.forEach(element => {
+			// TODO  类型处理
 			let tempBox: any;
 			tempBox = {};
 			tempBox.floor = element.properties.floor;
 			if (element.properties.floor === 0) {
+				// Mall
 				tempBox.floors = element.properties.floors;
+				tempBox.floorHeight = element.properties.floorHeight;
 			}
-			tempBox.height = element.properties.height;
 			tempBox.center = element.properties.center;
 			tempBox.arrVector2 = [];
 			element.geometry.coordinates.forEach((rings: Array<any>) => {

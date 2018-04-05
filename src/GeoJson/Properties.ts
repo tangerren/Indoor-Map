@@ -11,11 +11,11 @@ export class Properties {
 	/**
 	 * 高度，房间高、楼层高或者建筑物高
 	 */
-	height: number;
+	floorHeight?: number;
 	/**
 	 * 名称，用于显示label
 	 */
-	name: string;
+	name?: string;
 	/**
 	 * 建筑物类型，可以是洗手间、超市、商店等
 	 */
