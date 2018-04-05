@@ -32,6 +32,7 @@
     "three": "^0.91.0"
   },
   "devDependencies": {
+    "@types/stats.js": "^0.17.0",
     "@types/three": "^0.91.0",
     "css-loader": "^0.28.11",
     "html-loader": "^0.5.5",

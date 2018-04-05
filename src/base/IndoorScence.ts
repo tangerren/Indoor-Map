@@ -9,8 +9,10 @@ import { Vector3 } from 'three';
 import { ParseGeoJson } from '../GeoJson/ParseGeoJson';
 import { DrawGeoJson } from '../GeoJson/DrawGeoJson';
 
+import * as Stats from 'stats.js'
 
 export class IndoorScence {
+	stats: any;
 
 	rootEle: HTMLElement;
 	canvasEle: HTMLCanvasElement;
@@ -77,11 +79,16 @@ export class IndoorScence {
 		light.position.set(500, 500, 500);
 		this.scene.add(light);
 
+		this.stats = new Stats();
+		this.stats.showPanel(0); // 0: fps, 1: ms, 2: mb, 3+: custom
+		document.body.appendChild(this.stats.dom);
+		
 		this.animate();
 	}
 
 	// 定时更新场景
 	animate() {
+		this.stats.begin();
 		requestAnimationFrame(this.animate.bind(this));
 		this.controls.update();
 		if (this.viewChanged) {
@@ -93,6 +100,8 @@ export class IndoorScence {
 			}
 		}
 		this.viewChanged = false;
+		this.stats.end();
+
 	}
 
 	loadData(url: string) {
@@ -100,7 +109,7 @@ export class IndoorScence {
 		loader.load(url, (geoJSON) => {
 			let parse = new ParseGeoJson();
 			let jsonData = parse.parse(JSON.parse(geoJSON));
-			DrawGeoJson.draw(jsonData , this);
+			DrawGeoJson.draw(jsonData, this);
 		}, (xhr) => {
 			console.log((xhr.loaded / xhr.total * 100) + '% loaded');
 		}, (err) => {

@@ -48,7 +48,12 @@ export class DrawGeoJson {
 			if (item.floor == 0) {
 				boxMaterial = new THREE.MeshLambertMaterial(this.theme.building);
 			} else {
-				boxMaterial = new THREE.MeshLambertMaterial(this.theme.room('100', 102));
+				// boxMaterial = new THREE.MeshLambertMaterial(this.theme.room('100', 102));
+				boxMaterial = new THREE.MeshLambertMaterial({
+					color: new THREE.Color(Math.random(), Math.random(), Math.random()),
+					opacity: 0.8,
+					transparent: true
+				});
 			}
 
 			let boxMesh = new THREE.Mesh(boxGeometry, boxMaterial);
