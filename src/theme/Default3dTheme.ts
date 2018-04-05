@@ -1,4 +1,4 @@
-import { System } from '../base/System'
+import { System } from '../utils/System'
 import { Theme } from "../base/Theme";
 
 export class Default3dTheme extends Theme {
