@@ -11,6 +11,7 @@ import '../assets/css/indoor3D.css'
 
 export class IndoorMap {
 
+	indoorScence: IndoorScence;
 	/**
 	 * indoorMap的DOM根元素
 	 */
@@ -55,8 +56,27 @@ export class IndoorMap {
 
 		this.canvasEle = DomUtil.createCanvasEle(this.rootEle);
 
-		let indoorScence = new IndoorScence(this.rootEle, this.canvasEle);
-		indoorScence.loadData(options.dataUrl);
+		this.indoorScence = new IndoorScence(this.rootEle, this.canvasEle);
+		this.indoorScence.loadData(options.dataUrl, [this.creatFloorEle.bind(this)]);
+	}
+
+
+	creatFloorEle(aaa: any) {
+		if (aaa == undefined || aaa.length == 0) {
+			console.error('the data has not been loaded yet. please call this function in callback');
+			return null;
+		}
+
+		this.floorEle = document.createElement('ul');
+		this.floorEle.className = 'floorsUI';
+
+		for (let i = 0; i <= aaa[0].floors; i++) {
+			let li = document.createElement('li');
+			li.innerText = i === 0 ? 'All' : i.toString();
+			this.floorEle.appendChild(li);
+			li.onclick = () => this.indoorScence.drawFloor(i);
+		}
+		this.rootEle.appendChild(this.floorEle);
 	}
 
 }

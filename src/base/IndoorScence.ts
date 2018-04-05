@@ -10,9 +10,12 @@ import { ParseGeoJson } from '../GeoJson/ParseGeoJson';
 import { DrawGeoJson } from '../GeoJson/DrawGeoJson';
 
 import * as Stats from 'stats.js'
+import { Box } from './Box.js';
 
 export class IndoorScence {
-	stats: any;
+	boxs: Box[];
+	private parseGeoJson: ParseGeoJson;
+	stats: Stats;
 
 	rootEle: HTMLElement;
 	canvasEle: HTMLCanvasElement;
@@ -82,7 +85,7 @@ export class IndoorScence {
 		this.stats = new Stats();
 		this.stats.showPanel(0); // 0: fps, 1: ms, 2: mb, 3+: custom
 		document.body.appendChild(this.stats.dom);
-		
+
 		this.animate();
 	}
 
@@ -104,16 +107,38 @@ export class IndoorScence {
 
 	}
 
-	loadData(url: string) {
+	loadData(url: string, callBacks?: Array<Function>) {
 		var loader = new THREE.FileLoader();
 		loader.load(url, (geoJSON) => {
-			let parse = new ParseGeoJson();
-			let jsonData = parse.parse(JSON.parse(geoJSON));
-			DrawGeoJson.draw(jsonData, this);
+			this.parseGeoJson = new ParseGeoJson();
+			this.boxs = this.parseGeoJson.parse(JSON.parse(geoJSON));
+			DrawGeoJson.draw(this.boxs, this);
+			if (callBacks) {
+				callBacks.forEach(element => {
+					element(this.boxs);
+				});
+			}
 		}, (xhr) => {
 			console.log((xhr.loaded / xhr.total * 100) + '% loaded');
 		}, (err) => {
 			console.log(err);
 		})
+	}
+
+	drawFloor(floor: number) {
+		while (this.scene.children.length) {
+			this.scene.remove(this.scene.children[0]);
+		}
+		if (floor === 0) {
+			DrawGeoJson.draw(this.boxs, this);
+			return;
+		}
+		let floorBoxs: Box[]; floorBoxs = [];
+		this.boxs.forEach(ele => {
+			if (floor === ele.floor) {
+				floorBoxs.push(ele);
+			}
+		});
+		DrawGeoJson.draw(floorBoxs, this);
 	}
 }

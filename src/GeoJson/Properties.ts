@@ -25,6 +25,10 @@ export class Properties {
 	 */
 	floor: number;
 	/**
+	 * 共几层
+	 */
+	floors?: number;
+	/**
 	 * 建筑物的唯一标识ID
 	 */
 	id: string;

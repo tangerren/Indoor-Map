@@ -1,7 +1,7 @@
 
 
 import { GeoJSON } from './GeoJSON';
-import { Rect } from '../base/Rect';
+import { Box } from '../base/Box';
 
 import * as THREE from 'three';
 
@@ -10,19 +10,22 @@ export class ParseGeoJson {
 
 	constructor() { }
 
-	parse(json: GeoJSON): Rect[] {
+	parse(json: GeoJSON): Box[] {
 		if (json.type !== 'FeatureCollection') {
 			console.error('geojson type字段不符合要求！');
 			return [];
 		}
 
-		let mallData: Rect[] = [];
+		let mallData: Box[] = [];
 		json.features.forEach(element => {
 			let tempBox: any;
 			tempBox = {};
 			tempBox.floor = element.properties.floor;
+			if (element.properties.floor === 0) {
+				tempBox.floors = element.properties.floors;
+			}
 			tempBox.height = element.properties.height;
-			tempBox.center = element.properties.center;			
+			tempBox.center = element.properties.center;
 			tempBox.arrVector2 = [];
 			element.geometry.coordinates.forEach((rings: Array<any>) => {
 				rings.forEach(point => {

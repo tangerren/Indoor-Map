@@ -7,20 +7,21 @@ import { Theme } from '../base/Theme';
 import { Default3dTheme } from '../theme/Default3dTheme';
 import { Default2dTheme } from '../theme/Default2dTheme';
 import { Vector3 } from 'three';
-import { Rect } from '../base/Rect';
+import { Box } from '../base/Box';
 
 export class DrawGeoJson {
 
+	static mallCenter: number[];
 	static indoorScence: IndoorScence;
 	static theme: Default3dTheme;
 
-	static draw(data: Rect[], indoorScence: IndoorScence) {
+	static draw(data: Box[], indoorScence: IndoorScence) {
 		if (this.theme == undefined) {
 			this.theme = new Default3dTheme();
 		}
 		this.indoorScence = indoorScence;
-
-		let center = data[0].center;
+		if (!this.mallCenter)
+			this.mallCenter = data[0].center;
 		let baseHeight = 0.2;
 		let mallHeight = data[0].height;
 		let floorHeight = data[1].height;
@@ -84,8 +85,12 @@ export class DrawGeoJson {
 		})
 
 		//reset the camera to default configuration   重置相机位置、视角、角度
-		this.indoorScence.camera.position.set(center[0] - cameraDistance, 200, -center[1] + cameraDistance);
-		this.indoorScence.controls.target = new Vector3(center[0], 20, -center[1]);
+		this.indoorScence.camera.position.set(this.mallCenter[0] - cameraDistance, 200, -this.mallCenter[1] + cameraDistance);
+		this.indoorScence.controls.target = new Vector3(this.mallCenter[0], 20, -this.mallCenter[1]);
 
 	}
+
+
+	drawGround() { }
+
 }
