@@ -6,8 +6,6 @@
   "scripts": {
     "doc": "rimraf ./docs && typedoc --out docs src  --options ./configs/typedoc.js",
     "clean": "rimraf ./dist ./doc",
-    "build": "rimraf ./dist && tsc",
-    "build:watch": "rimraf ./dist tsc -w",
     "prod": "webpack --mode production --config ./configs/webpack.config.prod.js",
     "start": "webpack-dev-server --open --mode development --config ./configs/webpack.config.dev.js"
   },
