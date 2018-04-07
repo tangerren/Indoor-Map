@@ -107,6 +107,7 @@ export class IndoorScence {
 
 	}
 
+	// 加载json文件，并解析为特定格式，然后绘制
 	loadData(url: string, callBacks?: Array<Function>) {
 		var loader = new THREE.FileLoader();
 		loader.load(url, (geoJSON) => {

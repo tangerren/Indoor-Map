@@ -8,6 +8,7 @@ import { IndoorScence } from './IndoorScence'
 import { Mall } from './Mall'
 import { ImParam } from './ImParam';
 import '../assets/css/indoor3D.css'
+import { Box } from './Box';
 
 export class IndoorMap {
 
@@ -60,23 +61,43 @@ export class IndoorMap {
 		this.indoorScence.loadData(options.dataUrl, [this.creatFloorEle.bind(this)]);
 	}
 
-
-	creatFloorEle(aaa: any) {
-		if (aaa == undefined || aaa.length == 0) {
+	/**
+	 * 创建楼层选择元素
+	 * @param boxs 当前geojson解析结果
+	 */
+	creatFloorEle(boxs: Box[]) {
+		if (boxs == undefined || boxs.length == 0) {
 			console.error('the data has not been loaded yet. please call this function in callback');
 			return null;
 		}
 
 		this.floorEle = document.createElement('ul');
-		this.floorEle.className = 'floorsUI';
-
-		for (let i = 0; i <= aaa[0].floors; i++) {
+		this.floorEle.className = 'floors-ele';
+		let floors = (boxs[0] as Mall).floors;
+		for (let i = 0; i <= floors; i++) {
 			let li = document.createElement('li');
 			li.innerText = i === 0 ? 'All' : i.toString();
 			this.floorEle.appendChild(li);
-			li.onclick = () => this.indoorScence.drawFloor(i);
+			li.onclick = (e) => { this.indoorScence.drawFloor(i); this.updateFloorEle(e.target as HTMLElement) }
 		}
 		this.rootEle.appendChild(this.floorEle);
+	}
+
+	/**
+	 * 更新楼层选择元素的样式
+	 * @param target 当前选中的元素
+	 */
+	updateFloorEle(target: HTMLElement) {
+		let floorsEle = document.getElementsByClassName('floors-ele')[0];
+		if (this.rootEle == null) {
+			return;
+		}
+
+		for (let i = 0; i < floorsEle.children.length; i++) {
+			floorsEle.children[i].className = '';
+		}
+
+		target.className = 'selected';
 	}
 
 }
