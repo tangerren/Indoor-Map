@@ -59,6 +59,7 @@ export class IndoorMap {
 
 		this.indoorScence = new IndoorScence(this.rootEle, this.canvasEle);
 		this.indoorScence.loadData(options.dataUrl, [this.creatFloorEle.bind(this)]);
+		this.indoorScence.setSelectable(options.selectable);
 	}
 
 	/**

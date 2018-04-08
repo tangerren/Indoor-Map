@@ -11,6 +11,7 @@ import { DrawGeoJson } from '../GeoJson/DrawGeoJson';
 
 import * as Stats from 'stats.js'
 import { Box } from './Box.js';
+import { Room } from './Room.js';
 
 export class IndoorScence {
 	boxs: Box[];
@@ -35,6 +36,7 @@ export class IndoorScence {
 	showNames: boolean = true; // 是否显示房屋名称标注
 	isShowPubPoints: boolean = true; // 是否显示公共设施标注
 	selectionListener: Function;
+	selectedObj: Room;
 
 	// 初始化场景，相机，灯光
 	constructor(rootEle: HTMLElement, canvasEle: HTMLCanvasElement) {
@@ -126,6 +128,7 @@ export class IndoorScence {
 		})
 	}
 
+	// 绘制指定楼层
 	drawFloor(floor: number) {
 		this.clearObj();
 		if (floor === 0) {
@@ -141,6 +144,7 @@ export class IndoorScence {
 		DrawGeoJson.draw(floorBoxs, this, floor === 0 ? false : true);
 	}
 
+	// 清空场景中绘制的对象
 	clearObj() {
 		let lights = [];
 		while (this.scene.children.length) {
@@ -152,5 +156,84 @@ export class IndoorScence {
 		lights.forEach(element => {
 			this.scene.add(element);
 		});
+	}
+
+
+	//set if the objects are selectable  设置场景中的对象是否可以被选中
+	setSelectable(selectable: boolean) {
+		if (selectable) {
+			this.rayCaster = new THREE.Raycaster();
+			this.rootEle.addEventListener('mousedown', this.onSelectObject.bind(this), false);
+			this.rootEle.addEventListener('touchstart', this.onSelectObject.bind(this), false);
+		} else {
+			this.rootEle.removeEventListener('mousedown', this.onSelectObject.bind(this), false);
+			this.rootEle.removeEventListener('touchstart', this.onSelectObject.bind(this), false);
+		}
+		return this;
+	}
+
+	// 当场景元素设置为“可选”。鼠标点击或者触摸屏点击时执行函数，来处理xxxxxxxxxx选中
+	onSelectObject(event: Event) {
+		// 查找相交的对象
+		event.preventDefault();
+		var mouse = new THREE.Vector2();
+		if (event.type == "touchstart") {
+			mouse.x = ((<TouchEvent>event).touches[0].clientX / this.canvasEle.clientWidth) * 2 - 1;
+			mouse.y = -((<TouchEvent>event).touches[0].clientY / this.canvasEle.clientHeight) * 2 + 1;
+		} else {
+			mouse.x = ((<MouseEvent>event).clientX / this.canvasEle.clientWidth) * 2 - 1;
+			mouse.y = -((<MouseEvent>event).clientY / this.canvasEle.clientHeight) * 2 + 1;
+		}
+		var vector = new THREE.Vector3(mouse.x, mouse.y, 1);
+		vector.unproject(this.camera);
+
+		this.rayCaster.set(this.camera.position, vector.sub(this.camera.position).normalize());
+
+		let intersects = this.rayCaster.intersectObjects(this.scene.children);
+
+		if (intersects.length > 0) {
+			if (this.selectedObj != intersects[0].object) {
+				if (this.selectedObj) {
+					this.selectedObj.material.color.setHex(this.selectedObj.currentHex);
+				}
+				for (var i = 0; i < intersects.length; i++) {
+					this.selectedObj = intersects[i].object as Room;
+					if (this.selectedObj.type && this.selectedObj.type == "solidroom") {
+						this.select(this.selectedObj);
+						if (this.selectionListener) {
+							this.selectionListener(this.selectedObj.id); //notify the listener
+						}
+						break;
+					} else {
+						(this.selectedObj as any) = null;
+					}
+					if (this.selectedObj == null && this.selectionListener != null) {
+						this.selectionListener(-1);
+					}
+				}
+			}
+		} else {
+			if (this.selectedObj) {
+				this.selectedObj.material.color.setHex(this.selectedObj.currentHex);
+			}
+			(this.selectedObj as any) = null;
+			if (this.selectionListener) {
+				this.selectionListener(-1); //notify the listener
+			}
+		}
+		this.redraw();
+	}
+
+	// 高亮选中的对象
+	select(obj: any) {
+		obj.currentHex = this.selectedObj.material.color.getHex();
+		obj.material.color = new THREE.Color("#0CF5F7");
+		console.log(obj.id)
+	}
+
+	// 标识场景已被修改，在定时更新中会触发场景重绘
+	redraw() {
+		// 设置为true，在定时更新中会触发场景重绘
+		this.viewChanged = true;
 	}
 }
