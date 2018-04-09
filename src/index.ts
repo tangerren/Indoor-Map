@@ -9,4 +9,8 @@ var indoorMap = new IndoorMap({
 	mapDiv: ""
 });
 
+indoorMap.setSelectListen(function (obj: any) {
+	console.log(obj);
+})
+
 console.log('start compile !')

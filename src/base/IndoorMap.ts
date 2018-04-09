@@ -101,4 +101,7 @@ export class IndoorMap {
 		target.className = 'selected';
 	}
 
+	setSelectListen(callback: Function) {
+		this.indoorScence.selectionListener = callback;
+	}
 }

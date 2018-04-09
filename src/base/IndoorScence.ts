@@ -14,6 +14,7 @@ import { Box } from './Box.js';
 import { Room } from './Room.js';
 
 export class IndoorScence {
+
 	boxs: Box[];
 	private parseGeoJson: ParseGeoJson;
 	stats: Stats;
@@ -32,10 +33,10 @@ export class IndoorScence {
 	controls: OrbitControls; // 3d 缩放旋转平移控制器 OrbitControls
 	rayCaster: THREE.Raycaster;
 
-	viewChanged: boolean = true; // 场景是否改变
+	sceneChanged: boolean = true; // 场景是否改变
 	showNames: boolean = true; // 是否显示房屋名称标注
 	isShowPubPoints: boolean = true; // 是否显示公共设施标注
-	selectionListener: Function;
+	selectionListener: Function | undefined;
 	selectedObj: Room;
 
 	// 初始化场景，相机，灯光
@@ -95,8 +96,8 @@ export class IndoorScence {
 	animate() {
 		this.stats.begin();
 		requestAnimationFrame(this.animate.bind(this));
-		this.controls.update();
-		if (this.viewChanged) {
+		if (this.sceneChanged) {
+			this.controls.update();
 			this.renderer.clear();
 			this.renderer.render(this.scene, this.camera);
 			// 更新labels
@@ -104,7 +105,7 @@ export class IndoorScence {
 				// this.updateLabels();
 			}
 		}
-		this.viewChanged = false;
+		this.sceneChanged = false;
 		this.stats.end();
 
 	}
@@ -116,6 +117,7 @@ export class IndoorScence {
 			this.parseGeoJson = new ParseGeoJson();
 			this.boxs = this.parseGeoJson.parse(JSON.parse(geoJSON));
 			DrawGeoJson.draw(this.boxs, this);
+			this.reDraw();
 			if (callBacks) {
 				callBacks.forEach(element => {
 					element(this.boxs);
@@ -130,6 +132,7 @@ export class IndoorScence {
 
 	// 绘制指定楼层
 	drawFloor(floor: number) {
+		this.reDraw();
 		this.clearObj();
 		if (floor === 0) {
 			DrawGeoJson.draw(this.boxs, this);
@@ -158,7 +161,6 @@ export class IndoorScence {
 		});
 	}
 
-
 	//set if the objects are selectable  设置场景中的对象是否可以被选中
 	setSelectable(selectable: boolean) {
 		if (selectable) {
@@ -174,6 +176,7 @@ export class IndoorScence {
 
 	// 当场景元素设置为“可选”。鼠标点击或者触摸屏点击时执行函数，来处理xxxxxxxxxx选中
 	onSelectObject(event: Event) {
+		this.reDraw();
 		// 查找相交的对象
 		event.preventDefault();
 		var mouse = new THREE.Vector2();
@@ -191,24 +194,27 @@ export class IndoorScence {
 
 		let intersects = this.rayCaster.intersectObjects(this.scene.children);
 
+		// 有可选中的obj
 		if (intersects.length > 0) {
+			// 选择的元素不是当前选中的obj
 			if (this.selectedObj != intersects[0].object) {
+				// 恢复为以前的颜色
 				if (this.selectedObj) {
 					this.selectedObj.material.color.setHex(this.selectedObj.currentHex);
 				}
 				for (var i = 0; i < intersects.length; i++) {
 					this.selectedObj = intersects[i].object as Room;
 					if (this.selectedObj.type && this.selectedObj.type == "solidroom") {
-						this.select(this.selectedObj);
+						// 存储当前颜色
+						this.selectedObj.currentHex = this.selectedObj.material.color.getHex();
+						// 设置新的选中颜色
+						this.selectedObj.material.color = new THREE.Color("#0CF5F7");
 						if (this.selectionListener) {
 							this.selectionListener(this.selectedObj.id); //notify the listener
 						}
 						break;
 					} else {
 						(this.selectedObj as any) = null;
-					}
-					if (this.selectedObj == null && this.selectionListener != null) {
-						this.selectionListener(-1);
 					}
 				}
 			}
@@ -218,22 +224,15 @@ export class IndoorScence {
 			}
 			(this.selectedObj as any) = null;
 			if (this.selectionListener) {
-				this.selectionListener(-1); //notify the listener
+				this.selectionListener(); //notify the listener
 			}
 		}
-		this.redraw();
 	}
 
-	// 高亮选中的对象
-	select(obj: any) {
-		obj.currentHex = this.selectedObj.material.color.getHex();
-		obj.material.color = new THREE.Color("#0CF5F7");
-		console.log(obj.id)
-	}
-
-	// 标识场景已被修改，在定时更新中会触发场景重绘
-	redraw() {
-		// 设置为true，在定时更新中会触发场景重绘
-		this.viewChanged = true;
+	/**
+	 * 标识重新场景改变，出发animate重新绘制
+	 */
+	reDraw() {
+		this.sceneChanged = true;
 	}
 }
