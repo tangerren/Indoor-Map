@@ -131,7 +131,7 @@ export class IndoorScence {
 	}
 
 	// 绘制指定楼层
-	// TODO 绘制的时候，请求服务器获取对应的属性信息（JSON文件中只存放了ID）
+	// TODO: 绘制的时候，请求服务器获取对应的属性信息（JSON文件中只存放了ID）
 	drawFloor(floor: number) {
 		this.reDraw();
 		this.clearObj();

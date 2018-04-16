@@ -9,7 +9,7 @@ export class DomUtil {
 	TRANSITION_END = "webkitTransition" === this.TRANSITION || "OTransition" === this.TRANSITION ? this.TRANSITION + "End" : "transitionend";
 
 	// 根据 [width,height] 创建根元素
-	// TODO  后续优化为 创建任意指定属性、类型的元素
+	// TODO:  后续优化为 创建任意指定属性、类型的元素
 	static createRootEle(size: Array<number>): HTMLElement {
 		let rootEle = document.createElement('div');
 		rootEle.style.width = size[0] + 'px';
@@ -25,7 +25,7 @@ export class DomUtil {
 	}
 
 	// 根据 [width,height] 创建根元素
-	// TODO  后续优化为 创建任意指定属性、类型的元素
+	// TODO:  后续优化为 创建任意指定属性、类型的元素
 	static createCanvasEle(pEle: HTMLElement): HTMLCanvasElement {
 		let canvasEle = document.createElement('canvas');
 		canvasEle.style.width = '100%';
@@ -75,7 +75,7 @@ export class DomUtil {
 	}
 
 	// 获取 point 的3d转换描述
-	// TODO  类型完善
+	// TODO:  类型完善
 	getTranslateString(point: any) {
 		var dim = Browser.webkit3d;
 		return "translate" + (dim ? "3d" : "") + "(" + point[0] + "px," + point[1] + "px" + ((dim ? ",0" : "") + ")");

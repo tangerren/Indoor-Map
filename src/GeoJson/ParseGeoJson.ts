@@ -18,7 +18,7 @@ export class ParseGeoJson {
 		}
 		let mallData: Box[] = [];
 		json.features.forEach(element => {
-			// TODO  类型处理
+			// TODO:  类型处理
 			let tempBox: any;
 			tempBox = {};
 			tempBox.floor = element.properties.floor;
