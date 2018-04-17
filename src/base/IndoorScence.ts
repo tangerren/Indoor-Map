@@ -21,7 +21,6 @@ export class IndoorScence {
 
 	rootEle: HTMLElement;
 	canvasEle: HTMLCanvasElement;
-	// theme: any;
 	canvasWidth: number;
 	canvasWidthHalf: number;
 	canvasHeight: number;

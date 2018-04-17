@@ -1,13 +1,13 @@
 import { System } from '../utils/System'
 import { Theme } from "../base/Theme";
 
-export class Default3dTheme extends Theme {
+export class DefaultTheme extends Theme {
 	constructor() {
 		super();
 		this.room = super.room;
 	}
 
-	name = "test";//theme's name
+	name = "default";//theme's name
 	background = "#F2F2F2"; //background color
 
 	//building's style

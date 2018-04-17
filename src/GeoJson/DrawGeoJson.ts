@@ -4,8 +4,7 @@ import { IndoorScence } from '../base/IndoorScence';
 
 import { Theme } from '../base/Theme';
 
-import { Default3dTheme } from '../theme/Default3dTheme';
-import { Default2dTheme } from '../theme/Default2dTheme';
+import { DefaultTheme } from '../themes/DefaultTheme';
 import { Vector3 } from 'three';
 import { Box } from '../base/Box';
 import { Mall } from '../base/Mall';
@@ -43,11 +42,11 @@ export class DrawGeoJson {
 	static cameraDistance: number;
 
 	static indoorScence: IndoorScence;
-	static theme: Default3dTheme;
+	static theme: DefaultTheme;
 
 	static draw(data: Box[], indoorScence: IndoorScence, isFloor?: boolean) {
 		if (this.theme == undefined) {
-			this.theme = new Default3dTheme();
+			this.theme = new DefaultTheme();
 		}
 		this.indoorScence = indoorScence;
 		if (!isFloor) {
