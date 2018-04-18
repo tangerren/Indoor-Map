@@ -6,11 +6,16 @@ export class DefaultTheme extends Theme {
 		super();
 		this.room = super.room;
 	}
+	// 样式名称
+	name = "default";
 
-	name = "default";//theme's name
-	background = "#F2F2F2"; //background color
+	// 场景背景色
+	background = "#F2F2F2";
 
-	//building's style
+	// 房间被选中的样式
+	selectedColor = "#39FAFA";
+
+	// 建筑物样式
 	building = {
 		color: "#000000",
 		opacity: 0.1,
@@ -18,17 +23,15 @@ export class DefaultTheme extends Theme {
 		depthTest: false
 	}
 
-	//floor's style
+	// 楼层样式
 	floor = {
 		color: "#E0E0E0",
 		opacity: 1,
 		transparent: false
 	}
 
-	//selected room's style
-	selected = "#ffff55";
 
-	//room wires' style
+	// 房间结构线样式
 	strokeStyle = {
 		color: "#5C4433",
 		opacity: 0.5,
@@ -36,12 +39,14 @@ export class DefaultTheme extends Theme {
 		linewidth: 1
 	}
 
+	// 字体样式
 	fontStyle = {
 		color: "#231815",
 		fontsize: 40,
 		fontface: "Helvetica, MicrosoftYaHei "
 	}
 
+	// 图标路径
 	pubPointImg = {
 		"11001": System.imgPath + "/toilet.png",
 		"11002": System.imgPath + "/ATM.png",

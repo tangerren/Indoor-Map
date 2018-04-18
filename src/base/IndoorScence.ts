@@ -10,8 +10,8 @@ import { ParseGeoJson } from '../GeoJson/ParseGeoJson';
 import { DrawGeoJson } from '../GeoJson/DrawGeoJson';
 
 import * as Stats from 'stats.js'
-import { Box } from './Box.js';
-import { Room } from './Room.js';
+import { Box } from './Box';
+import { Room } from './Room';
 
 export class IndoorScence {
 
@@ -37,7 +37,7 @@ export class IndoorScence {
 	isShowPubPoints: boolean = true; // 是否显示公共设施标注
 	selectionListener: Function | undefined;
 	selectedObj: Room;
-
+	selectedColor: string;
 	// 初始化场景，相机，灯光
 	constructor(rootEle: HTMLElement, canvasEle: HTMLCanvasElement) {
 		this.rootEle = rootEle;
@@ -57,7 +57,7 @@ export class IndoorScence {
 		});
 		this.renderer.autoClear = true;
 		this.renderer.setSize(this.rootEle.clientWidth, this.rootEle.clientHeight);
-		this.renderer.setClearColor("#F2F2F2");
+		// this.renderer.setClearColor("#F2F2F2");  // 由theme中指定
 
 		// 相机
 		this.camera = new THREE.PerspectiveCamera(50, this.canvasWidth / this.canvasHeight, 0.1, 2000);
@@ -196,35 +196,24 @@ export class IndoorScence {
 
 		// 有可选中的obj
 		if (intersects.length > 0) {
-			// 选择的元素不是当前选中的obj
-			if (this.selectedObj != intersects[0].object) {
-				// 恢复为以前的颜色
-				if (this.selectedObj) {
-					this.selectedObj.material.color.setHex(this.selectedObj.currentHex);
-				}
-				for (var i = 0; i < intersects.length; i++) {
-					this.selectedObj = intersects[i].object as Room;
-					if (this.selectedObj.type && this.selectedObj.type == "solidroom") {
-						// 存储当前颜色
-						this.selectedObj.currentHex = this.selectedObj.material.color.getHex();
-						// 设置新的选中颜色
-						this.selectedObj.material.color = new THREE.Color("#0CF5F7");
-						if (this.selectionListener) {
-							this.selectionListener(this.selectedObj.id); //notify the listener
-						}
-						break;
-					} else {
-						(this.selectedObj as any) = null;
+			for (var i = 0; i < intersects.length; i++) {
+				let selectedObj = intersects[i].object;
+				if (selectedObj instanceof Room) {
+					// 恢复为以前的颜色
+					if (this.selectedObj) {
+						this.selectedObj.material.color.setHex(this.selectedObj.currentHex);
 					}
+					this.selectedObj = selectedObj as Room;
+					this.selectedObj = intersects[i].object as Room;
+					// 存储当前颜色
+					this.selectedObj.currentHex = this.selectedObj.material.color.getHex();
+					// 设置新的选中颜色
+					this.selectedObj.material.color = new THREE.Color(this.selectedColor);
+					if (this.selectionListener) {
+						this.selectionListener(this.selectedObj.id); //notify the listener
+					}
+					break;
 				}
-			}
-		} else {
-			if (this.selectedObj) {
-				this.selectedObj.material.color.setHex(this.selectedObj.currentHex);
-			}
-			(this.selectedObj as any) = null;
-			if (this.selectionListener) {
-				this.selectionListener(); //notify the listener
 			}
 		}
 	}

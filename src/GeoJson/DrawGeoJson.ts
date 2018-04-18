@@ -2,12 +2,11 @@
 import * as THREE from 'three';
 import { IndoorScence } from '../base/IndoorScence';
 
-import { Theme } from '../base/Theme';
-
 import { DefaultTheme } from '../themes/DefaultTheme';
 import { Vector3 } from 'three';
 import { Box } from '../base/Box';
 import { Mall } from '../base/Mall';
+import { Room } from '../base/Room';
 
 export class DrawGeoJson {
 
@@ -49,6 +48,10 @@ export class DrawGeoJson {
 			this.theme = new DefaultTheme();
 		}
 		this.indoorScence = indoorScence;
+
+		this.indoorScence.renderer.setClearColor(this.theme.background);
+		this.indoorScence.selectedColor = this.theme.selectedColor;
+
 		if (!isFloor) {
 			let mall: Mall;
 			mall = data[0] as Mall;
@@ -59,12 +62,16 @@ export class DrawGeoJson {
 			this.baseHeight = 0.2;
 			this.cameraDistance = 150;
 			this.floorShape = new THREE.Shape(mall.arrVector2);
-			//reset the camera to default configuration   重置相机位置、视角、角度
+			// 重置相机位置、视角、角度
 			this.indoorScence.camera.position.set(this.mallCenter[0] - this.cameraDistance, 200, -this.mallCenter[1] + this.cameraDistance);
 			this.indoorScence.controls.target = new Vector3(this.mallCenter[0], 20, -this.mallCenter[1]);
 		}
 
+		// data 为数据解析后的数组
 		data.forEach(item => {
+			if (item.floor != 0) {
+				item.type = 'Room';
+			}
 			// mall+room
 			let shape = new THREE.Shape(item.arrVector2);
 			// mall  room
@@ -84,21 +91,22 @@ export class DrawGeoJson {
 			let floorMaterial = new THREE.MeshLambertMaterial(this.theme.floor);
 			if (item.floor == 0) {
 				boxMaterial = new THREE.MeshLambertMaterial(this.theme.building);
-			} else {
-				// boxMaterial = new THREE.MeshLambertMaterial(this.theme.room('100', 102));
-				boxMaterial = new THREE.MeshLambertMaterial({
+			}
+
+			let boxMesh;
+			if (item.type == "Room") {
+				let roomMaterial = new THREE.MeshLambertMaterial({
 					color: new THREE.Color(Math.random(), Math.random(), Math.random()),
 					opacity: 0.8,
 					transparent: true
 				});
+				boxMesh = new Room(boxGeometry, roomMaterial);
+			} else {
+				boxMesh = new THREE.Mesh(boxGeometry, boxMaterial);
 			}
 
-			let boxMesh = new THREE.Mesh(boxGeometry, boxMaterial);
 			let floorMesh = new THREE.Mesh(floorGeometry, floorMaterial);
 
-			if (item.floor != 0) {
-				boxMesh.type = 'solidroom';
-			}
 
 			boxMesh.position.set(0, this.floorHeight * item.floor, 0);
 			floorMesh.position.set(0, this.floorHeight * item.floor, 0);
@@ -120,5 +128,5 @@ export class DrawGeoJson {
 			this.indoorScence.scene.add(boxMesh);
 			this.indoorScence.scene.add(floorMesh);
 		})
- 	}
+	}
 }
