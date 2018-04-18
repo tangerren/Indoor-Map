@@ -1,5 +1,3 @@
-
-
 import { GeoJSON } from './GeoJSON';
 import { Box } from '../base/Box';
 
@@ -18,16 +16,18 @@ export class ParseGeoJson {
 		}
 		let mallData: Box[] = [];
 		json.features.forEach(element => {
-			// TODO:  类型处理
-			let tempBox: any;
-			tempBox = {};
+			// TODO:  类型处理(区分Room 和 Floor 以及其他)
+			let tempBox = {} as Box;
+
 			tempBox.floor = element.properties.floor;
-			if (element.properties.floor === 0) {
-				// Mall
-				tempBox.floors = element.properties.floors;
-				tempBox.floorHeight = element.properties.floorHeight;
-			}
+			// 属性
+			// if (element.properties.floor === 0) {
+			tempBox.floors = element.properties.floors;
+			tempBox.floorHeight = element.properties.floorHeight;
+			tempBox.id = element.properties.id;
+			tempBox.roomType = element.properties.type;
 			tempBox.center = element.properties.center;
+			// }
 			tempBox.arrVector2 = [];
 			element.geometry.coordinates.forEach((rings: Array<any>) => {
 				rings.forEach(point => {

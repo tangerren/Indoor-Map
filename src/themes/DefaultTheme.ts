@@ -1,11 +1,9 @@
 import { System } from '../utils/System'
-import { Theme } from "../base/Theme";
+import { TYPE } from '../GeoJson/type';
 
-export class DefaultTheme extends Theme {
-	constructor() {
-		super();
-		this.room = super.room;
-	}
+export class DefaultTheme {
+
+
 	// 样式名称
 	name = "default";
 
@@ -44,6 +42,85 @@ export class DefaultTheme extends Theme {
 		color: "#231815",
 		fontsize: 40,
 		fontface: "Helvetica, MicrosoftYaHei "
+	}
+
+	room(type?: string) {
+		let style;
+		let index = type ? parseInt(TYPE[type]) : 0;
+		switch (index) {
+			case TYPE.floor:
+				// floor
+				style = {
+					color: "#4274BB",
+					opacity: 0.7,
+					transparent: true
+				};
+				break;
+			case TYPE.elev:
+				// 电梯
+				style = {
+					color: "#E60045",
+					opacity: 0.7,
+					transparent: true
+				};
+				break;
+			case TYPE.Boutique:
+				// 专卖店
+				style = {
+					color: "#A40282",
+					opacity: 0.7,
+					transparent: true
+				};
+				break;
+			case TYPE["3C"]:
+				// 3C数码
+				style = {
+					color: "#AA5C40",
+					opacity: 0.7,
+					transparent: true
+				};
+				break;
+			case TYPE.clothing:
+				// 服装店
+				style = {
+					color: "#67C567",
+					opacity: 0.7,
+					transparent: true
+				};
+				break;
+			case TYPE.SM:
+				// 超市
+				style = {
+					color: "#FF8400",
+					opacity: 0.7,
+					transparent: true
+				};
+				break;
+			case TYPE.mall:
+				// 商场大楼
+				style = {
+					color: "#8156FA",
+					opacity: 0.7,
+					transparent: true
+				};
+				break;
+			case TYPE.WC:
+				// 洗手间
+				style = {
+					color: "#FF84C6",
+					opacity: 0.7,
+					transparent: true
+				};
+				break;
+			default:
+				style = {
+					color: "#AAAAAA",
+					opacity: 0.7,
+					transparent: true
+				};
+				break;
+		}
+		return style;
 	}
 
 	// 图标路径

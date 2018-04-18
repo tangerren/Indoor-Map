@@ -1,6 +1,6 @@
 
 /**
- * 建筑物对象类型
+ * Room 类型
  */
 export enum TYPE {
 	/**

@@ -1,5 +1,3 @@
-import { TYPE } from './type'
-
 /**
  * 建筑物属性
  */
@@ -19,7 +17,7 @@ export class Properties {
 	/**
 	 * 建筑物类型，可以是洗手间、超市、商店等
 	 */
-	type: TYPE;
+	type: string;
 	/**
 	 * 楼层数，第几层
 	 */

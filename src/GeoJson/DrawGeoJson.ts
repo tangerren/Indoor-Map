@@ -69,6 +69,7 @@ export class DrawGeoJson {
 
 		// data 为数据解析后的数组
 		data.forEach(item => {
+			// 数组中第一个为建筑物轮廓
 			if (item.floor != 0) {
 				item.type = 'Room';
 			}
@@ -87,26 +88,22 @@ export class DrawGeoJson {
 			let boxGeometry = new THREE.ExtrudeGeometry(shape, extrudMallSettings);
 			let floorGeometry = new THREE.ExtrudeGeometry(this.floorShape, extrudeFloorSettings);
 
-			let boxMaterial;
-			let floorMaterial = new THREE.MeshLambertMaterial(this.theme.floor);
-			if (item.floor == 0) {
-				boxMaterial = new THREE.MeshLambertMaterial(this.theme.building);
-			}
-
 			let boxMesh;
 			if (item.type == "Room") {
-				let roomMaterial = new THREE.MeshLambertMaterial({
-					color: new THREE.Color(Math.random(), Math.random(), Math.random()),
-					opacity: 0.8,
-					transparent: true
-				});
+				let roomMaterial = new THREE.MeshLambertMaterial(this.theme.room(item.roomType));
+				// let roomMaterial = new THREE.MeshLambertMaterial({
+				// 	color: new THREE.Color(Math.random(), Math.random(), Math.random()),
+				// 	opacity: 0.8,
+				// 	transparent: true
+				// });
 				boxMesh = new Room(boxGeometry, roomMaterial);
 			} else {
+				let boxMaterial = new THREE.MeshLambertMaterial(this.theme.building);
 				boxMesh = new THREE.Mesh(boxGeometry, boxMaterial);
 			}
 
+			let floorMaterial = new THREE.MeshLambertMaterial(this.theme.floor);
 			let floorMesh = new THREE.Mesh(floorGeometry, floorMaterial);
-
 
 			boxMesh.position.set(0, this.floorHeight * item.floor, 0);
 			floorMesh.position.set(0, this.floorHeight * item.floor, 0);
