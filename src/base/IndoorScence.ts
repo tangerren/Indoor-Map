@@ -15,6 +15,7 @@ import { Room } from './Room';
 
 export class IndoorScence {
 
+	MuseXY = { X: 0, Y: 0 };
 	boxs: Box[];
 	private parseGeoJson: ParseGeoJson;
 	stats: Stats;
@@ -165,28 +166,43 @@ export class IndoorScence {
 	setSelectable(selectable: boolean) {
 		if (selectable) {
 			this.rayCaster = new THREE.Raycaster();
-			this.rootEle.addEventListener('mousedown', this.onSelectObject.bind(this), false);
+			this.rootEle.addEventListener('mousedown', this.remenberXY.bind(this), false);
+			this.rootEle.addEventListener('mouseup', this.onSelectObject.bind(this), false);
 			this.rootEle.addEventListener('touchstart', this.onSelectObject.bind(this), false);
 		} else {
-			this.rootEle.removeEventListener('mousedown', this.onSelectObject.bind(this), false);
+			this.rootEle.removeEventListener('mousedown', this.remenberXY.bind(this), false);
+			this.rootEle.removeEventListener('mouseup', this.onSelectObject.bind(this), false);
 			this.rootEle.removeEventListener('touchstart', this.onSelectObject.bind(this), false);
 		}
 		return this;
 	}
 
+	remenberXY(event: MouseEvent) {
+		if (event.button != 0)
+			return;
+		else {
+			this.MuseXY.X = event.screenX;
+			this.MuseXY.Y = event.screenY;
+		}
+	}
+
 	// 当场景元素设置为“可选”。鼠标点击或者触摸屏点击时执行函数，来处理xxxxxxxxxx选中
-	onSelectObject(event: Event) {
+	onSelectObject(event: MouseEvent) {
+		if (event.button != 0)
+			return;
+		if (event.screenX !== this.MuseXY.X || event.screenY !== this.MuseXY.Y)
+			return;
 		this.reDraw();
 		// 查找相交的对象
 		event.preventDefault();
 		var mouse = new THREE.Vector2();
-		if (event.type == "touchstart") {
-			mouse.x = ((<TouchEvent>event).touches[0].clientX / this.canvasEle.clientWidth) * 2 - 1;
-			mouse.y = -((<TouchEvent>event).touches[0].clientY / this.canvasEle.clientHeight) * 2 + 1;
-		} else {
-			mouse.x = ((<MouseEvent>event).clientX / this.canvasEle.clientWidth) * 2 - 1;
-			mouse.y = -((<MouseEvent>event).clientY / this.canvasEle.clientHeight) * 2 + 1;
-		}
+
+		// TODO: 触屏交互
+		// 	mouse.x = ((<TouchEvent>event).touches[0].clientX / this.canvasEle.clientWidth) * 2 - 1;
+		// 	mouse.y = -((<TouchEvent>event).touches[0].clientY / this.canvasEle.clientHeight) * 2 + 1;
+		mouse.x = ((<MouseEvent>event).clientX / this.canvasEle.clientWidth) * 2 - 1;
+		mouse.y = -((<MouseEvent>event).clientY / this.canvasEle.clientHeight) * 2 + 1;
+
 		var vector = new THREE.Vector3(mouse.x, mouse.y, 1);
 		vector.unproject(this.camera);
 
