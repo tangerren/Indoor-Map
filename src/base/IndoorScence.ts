@@ -177,6 +177,7 @@ export class IndoorScence {
 		return this;
 	}
 
+	// 记录鼠标初始位置
 	remenberXY(event: MouseEvent) {
 		if (event.button != 0)
 			return;

@@ -57,7 +57,7 @@
 		"properties": {
 			"id": "ta157k02AL7XBgV5XVGKSQ5B2CpPdZFb",
 			"floor": 1,
-			"type": "3C"
+			"type": "Boutique"
 		}
 	}, {
 		"type": "Feature",
@@ -114,7 +114,7 @@
 		"properties": {
 			"id": "m5JHPqbr79n2f4RAdFZqPPH9m6iJRrO4",
 			"floor": 1,
-			"type": "3C"
+			"type": "Boutique"
 		}
 	}, {
 		"type": "Feature",
@@ -162,7 +162,7 @@
 		"properties": {
 			"id": "O3t7ypJDggTtb1QioAWsrnuz9AIWC5cE",
 			"floor": 1,
-			"type": "3C"
+			"type": "Boutique"
 		}
 	}, {
 		"type": "Feature",
@@ -206,7 +206,7 @@
 		"properties": {
 			"id": "89fix3BI6B7P7xkNXQyHHdGROBWlrs7a",
 			"floor": 2,
-			"type": "3C"
+			"type": "clothing"
 		}
 	}, {
 		"type": "Feature",
@@ -225,7 +225,7 @@
 		"properties": {
 			"id": "aCiVQ7SJhG56am3gGn0u74xGT4tRDx33",
 			"floor": 2,
-			"type": "3C"
+			"type": "Boutique"
 		}
 	}, {
 		"type": "Feature",
@@ -293,7 +293,7 @@
 		"properties": {
 			"id": "k41oEAh38iXOArRO1U7JiHzdwTSWRj24",
 			"floor": 2,
-			"type": "3C"
+			"type": "SM"
 		}
 	}, {
 		"type": "Feature",
@@ -339,7 +339,7 @@
 		"properties": {
 			"id": "ZCgSqdEPkC17upcZKNJMgQ1aVfJEHrE5",
 			"floor": 2,
-			"type": "3C"
+			"type": "Boutique"
 		}
 	}, {
 		"type": "Feature",
@@ -364,7 +364,7 @@
 		"properties": {
 			"id": "msavfU29eLMPB0mp1PXxFdSmE5w0VuKT",
 			"floor": 3,
-			"type": "3C"
+			"type": "SM"
 		}
 	}, {
 		"type": "Feature",
@@ -415,7 +415,7 @@
 		"properties": {
 			"id": "JDPE4AJjNwEiSbuB8kf8kdDsMK0cKjoq",
 			"floor": 3,
-			"type": "3C"
+			"type": "clothing"
 		}
 	}, {
 		"type": "Feature",
@@ -494,7 +494,7 @@
 		"properties": {
 			"id": "jhIDgelPKf112Nsa5Az6nRh5eVe67HEw",
 			"floor": 4,
-			"type": "3C"
+			"type": "Boutique"
 		}
 	}, {
 		"type": "Feature",
@@ -551,7 +551,7 @@
 		"properties": {
 			"id": "VktJi6Wr2FrfbaUdnzBS18BDXE4JxNcs",
 			"floor": 4,
-			"type": "3C"
+			"type": "SM"
 		}
 	}, {
 		"type": "Feature",
@@ -613,7 +613,7 @@
 		"properties": {
 			"id": "l81fa7W6VK9FNa3eIkgtg7AX0aZ2HCiU",
 			"floor": 5,
-			"type": "3C"
+			"type": "SM"
 		}
 	}, {
 		"type": "Feature",
@@ -651,7 +651,7 @@
 		"properties": {
 			"id": "sAxGiOtxHeqrDCRmA3jPGeZY5BlsFxYF",
 			"floor": 5,
-			"type": "3C"
+			"type": "Boutique"
 		}
 	}, {
 		"type": "Feature",
@@ -695,7 +695,7 @@
 		"properties": {
 			"id": "na5czm4rFnwqI2iEYq9078ZzVA1xAY1s",
 			"floor": 6,
-			"type": "3C"
+			"type": "SM"
 		}
 	}, {
 		"type": "Feature",
@@ -733,7 +733,7 @@
 		"properties": {
 			"id": "jwJ7XHV5C72PmNv9uxg7SK0UlRf9J3DP",
 			"floor": 6,
-			"type": "3C"
+			"type": "SM"
 		}
 	}, {
 		"type": "Feature",
@@ -777,7 +777,7 @@
 		"properties": {
 			"id": "JixjBO0SkoytLtwt6de7h82ebvY60TO1",
 			"floor": 7,
-			"type": "3C"
+			"type": "Boutique"
 		}
 	}, {
 		"type": "Feature",
@@ -816,7 +816,7 @@
 		"properties": {
 			"id": "WzquKOX2oH4GubimIQlUCynN3MSvTiDf",
 			"floor": 7,
-			"type": "3C"
+			"type": "SM"
 		}
 	}, {
 		"type": "Feature",
@@ -869,7 +869,7 @@
 		"properties": {
 			"id": "a7V1iDAHxNLxrws8pfgSTFSj3q5iNL30",
 			"floor": 7,
-			"type": "3C"
+			"type": "Boutique"
 		}
 	}, {
 		"type": "Feature",
@@ -888,7 +888,7 @@
 		"properties": {
 			"id": "83bqw7THz9w23zAZYn2Uauq6FMlDV7yo",
 			"floor": 7,
-			"type": "3C"
+			"type": "clothing"
 		}
 	}, {
 		"type": "Feature",
@@ -907,7 +907,7 @@
 		"properties": {
 			"id": "EfI3shVcSUuSqEbiR0nOzntz8iCE4kWG",
 			"floor": 7,
-			"type": "3C"
+			"type": "SM"
 		}
 	}, {
 		"type": "Feature",
@@ -945,7 +945,7 @@
 		"properties": {
 			"id": "ZqKoQ7zZ0VowdQtgtZLg3vWtMuj6svV0",
 			"floor": 7,
-			"type": "3C"
+			"type": "clothing"
 		}
 	}]
 }
