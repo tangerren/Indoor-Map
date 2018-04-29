@@ -46,9 +46,9 @@ export class DefaultTheme {
 
 	room(type?: string) {
 		let style;
-		let index = type ? parseInt(TYPE[type]) : 0;
-		switch (index) {
-			case TYPE.floor:
+
+		switch (type) {
+			case TYPE[0]:
 				// floor
 				style = {
 					color: "#4274BB",
@@ -56,7 +56,7 @@ export class DefaultTheme {
 					transparent: true
 				};
 				break;
-			case TYPE.elev:
+			case TYPE[1]:
 				// 电梯
 				style = {
 					color: "#E60045",
@@ -64,7 +64,7 @@ export class DefaultTheme {
 					transparent: true
 				};
 				break;
-			case TYPE.Boutique:
+			case TYPE[2]:
 				// 专卖店
 				style = {
 					color: "#A40282",
@@ -72,7 +72,7 @@ export class DefaultTheme {
 					transparent: true
 				};
 				break;
-			case TYPE["3C"]:
+			case TYPE[3]:
 				// 3C数码
 				style = {
 					color: "#AA5C40",
@@ -80,7 +80,7 @@ export class DefaultTheme {
 					transparent: true
 				};
 				break;
-			case TYPE.clothing:
+			case TYPE[4]:
 				// 服装店
 				style = {
 					color: "#67C567",
@@ -88,7 +88,7 @@ export class DefaultTheme {
 					transparent: true
 				};
 				break;
-			case TYPE.SM:
+			case TYPE[5]:
 				// 超市
 				style = {
 					color: "#FF8400",
@@ -96,7 +96,7 @@ export class DefaultTheme {
 					transparent: true
 				};
 				break;
-			case TYPE.mall:
+			case TYPE[6]:
 				// 商场大楼
 				style = {
 					color: "#8156FA",
@@ -104,7 +104,7 @@ export class DefaultTheme {
 					transparent: true
 				};
 				break;
-			case TYPE.WC:
+			case TYPE[7]:
 				// 洗手间
 				style = {
 					color: "#FF84C6",
