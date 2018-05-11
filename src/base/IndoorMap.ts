@@ -52,7 +52,7 @@ export class IndoorMap {
 			this.rootEle = <HTMLElement>document.getElementById(options.mapDiv);
 			this.rootEle.style.background = "#F2F2F2";
 		} else {
-			this.rootEle = DomUtil.createRootEle([window.innerWidth, window.innerHeight]);
+			this.rootEle = DomUtil.createRootEle();
 		}
 
 		this.canvasEle = DomUtil.createCanvasEle(this.rootEle);

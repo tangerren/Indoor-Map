@@ -10,10 +10,10 @@ export class DomUtil {
 
 	// 根据 [width,height] 创建根元素
 	// TODO:  后续优化为 创建任意指定属性、类型的元素
-	static createRootEle(size: Array<number>): HTMLElement {
+	static createRootEle(): HTMLElement {
 		let rootEle = document.createElement('div');
-		rootEle.style.width = size[0] + 'px';
-		rootEle.style.height = size[1] + 'px';
+		rootEle.style.width = '100%';
+		rootEle.style.height = '100%';
 		rootEle.style.top = '0px';
 		rootEle.style.left = '0px';
 		rootEle.style.position = 'absolute';
