@@ -2,7 +2,7 @@
 
 ### demo  [Indoor-Map](https://woshisunwukong.github.io/Indoor-Map/)
 
-draw Indoor-Map use geojson drawb by  [Indoor-Map-Draw](https://github.com/WoShiSunWuKong/Indoor-Map-Draw)
+draw ordinates data by [Indoor-Map-Draw](https://github.com/WoShiSunWuKong/Indoor-Map-Draw),use geojson format
 
 ## Installation
 clone the repository , run npm commond 
