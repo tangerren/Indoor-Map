@@ -1,6 +1,6 @@
 # Indoor-Map
 
-### demo  [Indoor-Map](https://woshisunwukong.github.io/Indoor-Map/)
+
 
 使用 [Indoor-Map-Draw](https://github.com/WoShiSunWuKong/Indoor-Map-Draw)画坐标系，坐标文件时geojson格式
 
