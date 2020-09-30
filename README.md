@@ -2,7 +2,7 @@
 
 
 
-使用 [Indoor-Map-Draw](https://github.com/WoShiSunWuKong/Indoor-Map-Draw)画坐标系，坐标文件时geojson格式
+使用[Indoor-Map-Draw](https://github.com/WoShiSunWuKong/Indoor-Map-Draw) 这个工具来绘制楼宇房屋的坐标，坐标文件用geojson格式来保存
 
 ## Installation
 把代码拉下来
