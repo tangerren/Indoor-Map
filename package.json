@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/WoShiSunWuKong/Indoor-Map.git"
+    "url": "git+https://github.com/tangerren/Indoor-Map.git"
   },
   "keywords": [
     "indoor",
@@ -21,9 +21,9 @@
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/WoShiSunWuKong/Indoor-Map/issues"
+    "url": "https://github.com/tangerren/Indoor-Map/issues"
   },
-  "homepage": "https://github.com/WoShiSunWuKong/Indoor-Map#readme",
+  "homepage": "https://github.com/tangerren/Indoor-Map#readme",
   "dependencies": {
     "dat.gui": "^0.7.2",
     "stats.js": "^0.17.0",
